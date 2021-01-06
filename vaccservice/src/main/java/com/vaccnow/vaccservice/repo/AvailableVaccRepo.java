@@ -16,4 +16,7 @@ public interface AvailableVaccRepo extends JpaRepository<AvailableVacc, Integer>
 	
 	@Query("SELECT av FROM AvailableVacc av JOIN FETCH av.branch b JOIN FETCH av.vaccine v where av.availableNo>?1 AND b.id=?2 ORDER BY b.id")
 	public List<AvailableVacc> getVaccByAvailablilityAndBranch(long availableNo,int branchId);
+	
+	@Query("SELECT av FROM AvailableVacc av JOIN FETCH av.branch b JOIN FETCH av.vaccine v where av.availableNo>?1 AND b.id=?2 AND v.id=?3 ORDER BY b.id")
+	public List<AvailableVacc> getVaccByAvailablilityAndBranchAndVaccine(long availableNo,int branchId, int vaccinId);
 }

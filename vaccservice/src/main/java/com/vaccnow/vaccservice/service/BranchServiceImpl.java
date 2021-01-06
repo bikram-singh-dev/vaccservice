@@ -40,6 +40,8 @@ public class BranchServiceImpl implements IBranchService {
 	private String timeslot;	
 	@Value("${vacc.slotDuration}")
 	private Long slotDuration;
+	@Value("${vacc.slotDays}")
+	private Long slotDays;
 	
 	@Override
 	public List<BranchDTO> getAllBranches() {
@@ -59,8 +61,7 @@ public class BranchServiceImpl implements IBranchService {
 
 	@Override
 	public List<BranchTimeSlotDTO> getBranchSlots(int branchId) {
-		//System.out.println(branchId);
-		//List<AvailableVacc> availableVaccL=availVaccRepo.getVaccByAvailablilityAndBranch(0, branchId).size();
+		
 		List<BranchAndVaccineDTO> branchAndVaccineDTOList=getBranch(branchId);
 		if(branchAndVaccineDTOList.size()>0) {
 			List<LocalDateTime> slotList=new LinkedList<>();
@@ -68,22 +69,21 @@ public class BranchServiceImpl implements IBranchService {
 			String stringDateTime=tomorrow.toString() +" "+ timeslot;
 			DateTimeFormatter form= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			LocalDateTime dateTime= LocalDateTime.parse(stringDateTime, form);
-			Long totMins=dateTime.until(dateTime.plus(7, ChronoUnit.DAYS), ChronoUnit.MINUTES);
+			Long totMins=dateTime.until(dateTime.plus(slotDays, ChronoUnit.DAYS), ChronoUnit.MINUTES);
 			Long totSLot=totMins/slotDuration;
 			slotList.add(dateTime);
 			for(long i=1;i<totSLot;i++) {
 				dateTime=dateTime.plus(slotDuration,ChronoUnit.MINUTES);
 				slotList.add(dateTime);
 			}
-			//List<LocalDateTime> blockedSlot= scheduleRepo.getBlockedTimeSlotByBranch(branchId, dateTime);
+			
 			List<Schedule> ScheduleL= scheduleRepo.getBlockedTimeSlotByBranch(branchId, LocalDateTime.parse(stringDateTime, form));
-			//System.out.println(ScheduleL);
-			//System.out.println(slotList);
+			
 			for(Schedule obj:ScheduleL) {
-				//System.out.println(obj.getTimeSlot());
+				
 				slotList.remove(obj.getTimeSlot());
 			}
-			//System.out.println(slotList);
+			
 			List<BranchTimeSlotDTO> branchSlotList;
 			if(slotList.size()>0) {
 				branchSlotList=new ArrayList<>();
@@ -94,13 +94,10 @@ public class BranchServiceImpl implements IBranchService {
 				myobj.setBranchName(branchAndVaccineDTOList.get(0).getBranchName());
 				myobj.getTimeSlot().addAll(slotList);
 				branchSlotList.add(myobj);
-				//System.out.println(branchSlotList);
+				
 				return branchSlotList;
 			}
-		}
-		//System.out.println(slotList);
-		//System.out.println(dateTime);
-		//LocalDateTime 
+		}		
 		return null;
 	}
 

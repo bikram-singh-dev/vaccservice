@@ -46,6 +46,6 @@ public class BranchController {
 	@ApiOperation(value = "Finds availble slots by branchId",response = BranchTimeSlotDTO.class)
 	public List<BranchTimeSlotDTO> getBranchSlots(@PathVariable int id){
 		return branchService.getBranchSlots(id);
-		//return null;
+		
 	}
 }
