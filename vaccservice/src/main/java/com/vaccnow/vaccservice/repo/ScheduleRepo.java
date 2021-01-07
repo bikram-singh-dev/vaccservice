@@ -15,6 +15,6 @@ public interface ScheduleRepo extends JpaRepository<Schedule, Long> {
 	@Query("SELECT s FROM Schedule s JOIN FETCH s.branch b JOIN FETCH s.vaccine v WHERE b.id=?1 AND s.timeSlot>=?2 ORDER BY s.timeSlot")
 	public List<Schedule> getBlockedTimeSlotByBranch(int branchId, LocalDateTime dateTime);
 	
-	@Query("SELECT s FROM Schedule s JOIN FETCH s.branch b JOIN FETCH s.vaccine v WHERE b.id=?1 AND s.timeSlot=?2 AND v.id=?3 AND s.schedStatus=?4")
-	public List<Schedule> getSchedCountByBranchAndVaccineAndDateTime(int branchId, LocalDateTime dateTime, int vaccineId, String schedStatus);
+	@Query("SELECT s FROM Schedule s JOIN FETCH s.branch b JOIN FETCH s.vaccine v WHERE b.id=?1 AND s.timeSlot=?2 AND v.id=?3 AND s.schedStatus IN (?4)")
+	public List<Schedule> getSchedCountByBranchAndVaccineAndDateTime(int branchId, LocalDateTime dateTime, int vaccineId, List<String> schedStatus);
 }

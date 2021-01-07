@@ -18,7 +18,6 @@ import com.vaccnow.vaccservice.dto.BranchAndVaccineDTO;
 import com.vaccnow.vaccservice.dto.BranchDTO;
 import com.vaccnow.vaccservice.dto.BranchTimeSlotDTO;
 import com.vaccnow.vaccservice.entity.Schedule;
-import com.vaccnow.vaccservice.repo.AvailableVaccRepo;
 import com.vaccnow.vaccservice.repo.BranchRepo;
 import com.vaccnow.vaccservice.repo.ScheduleRepo;
 
@@ -30,7 +29,8 @@ public class BranchServiceImpl implements IBranchService {
 	@Autowired
 	private BranchConvertor branchConv;
 	@Autowired
-	private AvailableVaccRepo availVaccRepo;
+	private IAvailableVaccService availableVaccService;
+	
 	@Autowired
 	private BranchAndVaccineConvertor branchVaccConv;
 	@Autowired
@@ -50,13 +50,12 @@ public class BranchServiceImpl implements IBranchService {
 
 	@Override
 	public List<BranchAndVaccineDTO> getAllAvilableVaccines() {
-		return branchVaccConv.entitytoVOList(availVaccRepo.getVaccByAvailablility(0));
-		
+		return branchVaccConv.entitytoVOList(availableVaccService.getAvailableVacc(1));
 	}
 
 	@Override
 	public List<BranchAndVaccineDTO> getBranch(int id) {
-		return branchVaccConv.entitytoVOList(availVaccRepo.getVaccByAvailablilityAndBranch(0, id));
+		return branchVaccConv.entitytoVOList(availableVaccService.getAvailableVaccPerBranch(1, id));
 	}
 
 	@Override
