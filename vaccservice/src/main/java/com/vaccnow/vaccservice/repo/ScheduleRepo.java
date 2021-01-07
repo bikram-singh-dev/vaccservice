@@ -17,4 +17,7 @@ public interface ScheduleRepo extends JpaRepository<Schedule, Long> {
 	
 	@Query("SELECT s FROM Schedule s JOIN FETCH s.branch b JOIN FETCH s.vaccine v WHERE b.id=?1 AND s.timeSlot=?2 AND v.id=?3 AND s.schedStatus IN (?4)")
 	public List<Schedule> getSchedCountByBranchAndVaccineAndDateTime(int branchId, LocalDateTime dateTime, int vaccineId, List<String> schedStatus);
+	
+	@Query("SELECT s FROM Schedule s WHERE s.genSchedId=?1")
+	public List<Schedule> getSchedByGenSchedId(String genSchedId);
 }

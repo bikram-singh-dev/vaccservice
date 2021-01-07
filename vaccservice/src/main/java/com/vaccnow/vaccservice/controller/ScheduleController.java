@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vaccnow.vaccservice.dto.PaymentDTO;
+import com.vaccnow.vaccservice.dto.PaymentReplyDTO;
 import com.vaccnow.vaccservice.dto.ScheduleDTO;
 import com.vaccnow.vaccservice.service.IScheduleService;
 
@@ -23,6 +25,14 @@ public class ScheduleController {
 	public String addSchedule(@RequestBody ScheduleDTO scheduleDTO){
 		
 		return scheduleService.addSchedule(scheduleDTO);
+		
+	}
+	
+	@PostMapping("/makePayment")
+	@ApiOperation(value = "Makes payment as per payment type and returns either generated payId or error message")
+	public PaymentReplyDTO makePayment(@RequestBody PaymentDTO paymentDTO){
+		
+		return scheduleService.confirmSched(paymentDTO);
 		
 	}
 }

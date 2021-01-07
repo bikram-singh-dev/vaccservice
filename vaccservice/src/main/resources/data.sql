@@ -1,5 +1,5 @@
 insert into branch(name, city, address, shot_cap_per_slot) values ('branch01','abc city','abcd asdfk alkdf address',2),('branch02','bca city','xyz asfk alf address',1),('branch03','cba city','dbca adfk fdf address',3);
 insert into vaccine(name, desc, req_doses) values ('vacc01','Vaccine for Covid-19',2),('vacc02','another Vaccine for Covid-19',1);
 insert into available_vacc(branch_id, vaccine_id, available_no) values (1,1,50000000),(2,1,40000000),(3,1,45000000),(1,2,20000000);
-insert into payment(desc, GEN_PAYMENT_ID , payment_Type, payment_Status) values ('payment for covid-19 vaccine','vaccnowPay01','Fawry','confirmed'), ('payment for covid-19 vaccine','vaccnowPay02','Fawry','confirmed');
+insert into payment(desc, GEN_PAYMENT_ID , payment_Type, payment_Status, phone, email) values ('payment for covid-19 vaccine','vaccnowPay01','Fawry','confirmed',1234567890,'abc@bca.com'), ('payment for covid-19 vaccine','vaccnowPay02','Fawry','confirmed',0987654321,'cba@abc.com');
 insert into schedule(gen_Sched_Id, time_Slot, branch_id, vaccine_id, payment_id, sched_Status) values ('vaccnowSched01','2021-01-07T09:00',1,1,1,'Confirmed'),('vaccnowSched02','2021-01-07T09:30',1,1,2,'Confirmed');

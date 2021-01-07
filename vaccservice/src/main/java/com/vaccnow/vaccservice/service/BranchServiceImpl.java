@@ -76,11 +76,27 @@ public class BranchServiceImpl implements IBranchService {
 				slotList.add(dateTime);
 			}
 			
-			List<Schedule> ScheduleL= scheduleRepo.getBlockedTimeSlotByBranch(branchId, LocalDateTime.parse(stringDateTime, form));
+			//List<Schedule> ScheduleL= scheduleRepo.getBlockedTimeSlotByBranch(branchId, LocalDateTime.parse(stringDateTime, form));
 			
-			for(Schedule obj:ScheduleL) {
+			//for(Schedule obj:ScheduleL) {
 				
-				slotList.remove(obj.getTimeSlot());
+				//slotList.remove(obj.getTimeSlot());
+			//}
+			
+			List<Schedule> ScheduleL= scheduleRepo.getBlockedTimeSlotByBranch(branchId, LocalDateTime.parse(stringDateTime, form));
+			int slott=0;
+			if(ScheduleL.size()>0)
+				slott=ScheduleL.get(0).getBranch().getShotCapPerSlot();
+			int counter=slott;
+			for(int i=0;i<ScheduleL.size();i++) {
+				if(i+1<ScheduleL.size()) {
+					if(ScheduleL.get(i).getTimeSlot().equals(ScheduleL.get(i+1).getTimeSlot()))
+						counter--;
+					else
+						counter=slott;
+				}
+				if(counter==1)
+					slotList.remove(ScheduleL.get(i).getTimeSlot());
 			}
 			
 			List<BranchTimeSlotDTO> branchSlotList;
