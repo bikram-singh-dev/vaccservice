@@ -43,6 +43,9 @@ public class BranchServiceImpl implements IBranchService {
 	@Value("${vacc.slotDays}")
 	private Long slotDays;
 	
+	@Value("#{'${vacc.blockedschedStatusList}'.split(',')}")
+	private List<String> blockedschedStatusList;	
+	
 	@Override
 	public List<BranchDTO> getAllBranches() {
 		return branchConv.getBranchVOList(branchRepo.findAll());
@@ -83,7 +86,7 @@ public class BranchServiceImpl implements IBranchService {
 				//slotList.remove(obj.getTimeSlot());
 			//}
 			
-			List<Schedule> ScheduleL= scheduleRepo.getBlockedTimeSlotByBranch(branchId, LocalDateTime.parse(stringDateTime, form));
+			List<Schedule> ScheduleL= scheduleRepo.getBlockedTimeSlotByBranch(branchId, LocalDateTime.parse(stringDateTime, form), blockedschedStatusList);
 			int slott=0;
 			if(ScheduleL.size()>0)
 				slott=ScheduleL.get(0).getBranch().getShotCapPerSlot();

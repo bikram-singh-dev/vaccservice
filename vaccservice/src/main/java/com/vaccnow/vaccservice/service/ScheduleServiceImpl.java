@@ -40,6 +40,8 @@ public class ScheduleServiceImpl implements IScheduleService {
 	private String schedStatusCancled;
 	@Value("${vacc.slotDuration}")
 	private Long slotDuration;
+	@Value("#{'${vacc.paymentMethodList}'.split(',')}")
+	private List<String> payMethodList;	
 
 	@Override
 	public String addSchedule(ScheduleDTO scheduleDTO) {
@@ -138,6 +140,10 @@ public class ScheduleServiceImpl implements IScheduleService {
 		paymentReplyDTO.setMessage("Please enter a valid generated schedule ID");
 		if(paymentDTO.getGenSchedId()==null)
 			return paymentReplyDTO;
+		if(!payMethodList.contains(paymentDTO.getPaymentType())) {
+			paymentReplyDTO.setMessage("Only following payment methods supported:"+payMethodList);
+			return paymentReplyDTO;
+		}
 		List<Schedule> schdList=scheduleRepo.getSchedByGenSchedId(paymentDTO.getGenSchedId());
 		if(schdList.size()==0)
 			return paymentReplyDTO;
