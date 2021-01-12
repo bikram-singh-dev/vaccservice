@@ -1,4 +1,4 @@
-package com.vaccnow.vaccservice.service;
+package com.vaccnow.vaccservice.serviceimpl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vaccnow.vaccservice.entity.AvailableVacc;
 import com.vaccnow.vaccservice.repo.AvailableVaccRepo;
+import com.vaccnow.vaccservice.serviceinterface.IAvailableVaccService;
 
 @Service
 public class AvailableVaccServiceImpl implements IAvailableVaccService {

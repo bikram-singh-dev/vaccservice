@@ -1,4 +1,4 @@
-package com.vaccnow.vaccservice.service;
+package com.vaccnow.vaccservice.serviceinterface;
 
 import java.util.List;
 

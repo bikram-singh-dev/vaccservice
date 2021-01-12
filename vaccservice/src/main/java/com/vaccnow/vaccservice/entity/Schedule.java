@@ -9,7 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter @Setter
 public class Schedule {
 
 	@Id
@@ -24,49 +28,5 @@ public class Schedule {
 	@OneToOne
 	private Payment payment;
 	private String schedStatus;
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getGenSchedId() {
-		return genSchedId;
-	}
-	public void setGenSchedId(String genSchedId) {
-		this.genSchedId = genSchedId;
-	}
-	public LocalDateTime getTimeSlot() {
-		return timeSlot;
-	}
-	public void setTimeSlot(LocalDateTime timeSlot) {
-		this.timeSlot = timeSlot;
-	}
-	public Branch getBranch() {
-		return branch;
-	}
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-	public Vaccine getVaccine() {
-		return vaccine;
-	}
-	public void setVaccine(Vaccine vaccine) {
-		this.vaccine = vaccine;
-	}
-	public Payment getPayment() {
-		return payment;
-	}
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-	public String getSchedStatus() {
-		return schedStatus;
-	}
-	public void setSchedStatus(String schedStatus) {
-		this.schedStatus = schedStatus;
-	}
-	
 	
 }

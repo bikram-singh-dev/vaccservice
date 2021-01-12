@@ -6,7 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter @Setter
 public class AvailableVacc {
 
 	@Id
@@ -17,30 +21,5 @@ public class AvailableVacc {
 	@ManyToOne
 	private Vaccine vaccine;
 	private long availableNo;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public Branch getBranch() {
-		return branch;
-	}
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-	public Vaccine getVaccine() {
-		return vaccine;
-	}
-	public void setVaccine(Vaccine vaccine) {
-		this.vaccine = vaccine;
-	}
-	public long getAvailableNo() {
-		return availableNo;
-	}
-	public void setAvailableNo(long availableNo) {
-		this.availableNo = availableNo;
-	}
-	
 	
 }

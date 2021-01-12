@@ -1,4 +1,4 @@
-package com.vaccnow.vaccservice.service;
+package com.vaccnow.vaccservice.serviceimpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.vaccnow.vaccservice.convertor.ScheduleConvertor;
 import com.vaccnow.vaccservice.dto.ReportBranchVaccineDTO;
 import com.vaccnow.vaccservice.repo.ScheduleRepo;
+import com.vaccnow.vaccservice.serviceinterface.IReportingService;
 
 @Service
 public class ReportingServiceImpl implements IReportingService {
@@ -26,7 +27,7 @@ public class ReportingServiceImpl implements IReportingService {
 
 	@Override
 	public List<ReportBranchVaccineDTO> getAppliedVaccPerBranch(int branchId) {
-		return scheduleConvertor.entityToDTO(scheduleRepo.getVaccSchedByBranchAndSchedStatusTillNow(branchId, Arrays.asList(schedStatusConf)));
+		return scheduleConvertor.entityToDTOList(scheduleRepo.getVaccSchedByBranchAndSchedStatusTillNow(branchId, Arrays.asList(schedStatusConf)));
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class ReportingServiceImpl implements IReportingService {
 			endDateTime=startDate.atTime(23, 59, 59);
 		}
 		
-		return scheduleConvertor.entityToDTO(scheduleRepo.getVaccSchedBySchedStatusBetweenDateTime(startDate.atStartOfDay(), endDateTime, Arrays.asList(schedStatusConf)));
+		return scheduleConvertor.entityToDTOList(scheduleRepo.getVaccSchedBySchedStatusBetweenDateTime(startDate.atStartOfDay(), endDateTime, Arrays.asList(schedStatusConf)));
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class ReportingServiceImpl implements IReportingService {
 			endDateTime=startDate.atTime(23, 59, 59);
 		}
 		
-		return scheduleConvertor.entityToDTO(scheduleRepo.getVaccSchedBySchedStatusBetweenDateTime(startDateTime, endDateTime, Arrays.asList(schedStatusConf)));
+		return scheduleConvertor.entityToDTOList(scheduleRepo.getVaccSchedBySchedStatusBetweenDateTime(startDateTime, endDateTime, Arrays.asList(schedStatusConf)));
 	}
 
 }

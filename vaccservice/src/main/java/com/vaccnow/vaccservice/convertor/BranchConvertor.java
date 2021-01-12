@@ -11,7 +11,7 @@ import com.vaccnow.vaccservice.entity.Branch;
 @Component
 public class BranchConvertor {
 
-	public BranchDTO entityToVO(Branch branch){
+	public BranchDTO entityToDTO(Branch branch){
 		BranchDTO branchVO=new BranchDTO();
 		branchVO.setId(branch.getId());
 		branchVO.setName(branch.getName());
@@ -21,7 +21,7 @@ public class BranchConvertor {
 		
 	}	
 	
-	public List<BranchDTO> getBranchVOList(List<Branch> branchList){
-		return branchList.stream().map(branch -> entityToVO(branch)).collect(Collectors.toList());		
+	public List<BranchDTO> entityToDTOList(List<Branch> branchList){
+		return branchList.stream().map(branch -> entityToDTO(branch)).collect(Collectors.toList());		
 	}
 }

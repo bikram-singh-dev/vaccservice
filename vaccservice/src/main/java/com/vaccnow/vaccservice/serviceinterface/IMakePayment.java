@@ -1,4 +1,4 @@
-package com.vaccnow.vaccservice.service;
+package com.vaccnow.vaccservice.serviceinterface;
 
 import com.vaccnow.vaccservice.dto.PaymentDTO;
 
