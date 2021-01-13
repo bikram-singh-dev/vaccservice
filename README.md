@@ -24,3 +24,7 @@ Pre Requisites:
 3.To check API endpoints go to browser and paste "http://localhost:8321/swagger-ui.html"
 
 Note: Not using any mail server and just firing a new thread to log the email message and subject along with recepient email address on the console.
+
+Date format to be used: **YYYY-mm-dd**
+
+Datetime format to be used: **YYYY-mm-ddTHH:mm:ss**
